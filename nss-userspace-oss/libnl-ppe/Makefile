@@ -3,7 +3,7 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=libnl-ppe
 PKG_RELEASE:=1
-LIBNLPPE_BUILD_DIR:=$(TOPDIR)/qca/src/nss-userspace-oss/ppe
+LIBNLPPE_BUILD_DIR:=$(TOPDIR)/qca/src/nss/apps-oss/nss-userspace-oss/ppe
 
 include $(INCLUDE_DIR)/package.mk
 

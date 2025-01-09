@@ -4,7 +4,7 @@ include $(INCLUDE_DIR)/package.mk
 
 PKG_NAME:=ppecfg
 PKG_RELEASE:=1
-PPECFG_BUILD_DIR:=$(TOPDIR)/qca/src/nss-userspace-oss/ppe
+PPECFG_BUILD_DIR:=$(TOPDIR)/qca/src/nss/apps-oss/nss-userspace-oss/ppe
 
 define Package/ppecfg
   SECTION:=utils

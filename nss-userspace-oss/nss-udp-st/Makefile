@@ -4,7 +4,7 @@ PKG:=nss-udp-st
 PKG_NAME:=$(PKG)
 PKG_RELEASE:=1
 
-LOCAL_SRC:=$(TOPDIR)/qca/src/nss-speedtest/nss-udp-st/
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/nss-speedtest/nss-udp-st/
 include $(INCLUDE_DIR)/local-development.mk
 
 include $(INCLUDE_DIR)/package.mk

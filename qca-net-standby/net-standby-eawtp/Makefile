@@ -5,7 +5,7 @@ PKG_NAME:=netstandby-eawtp-drv
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=2
-LOCAL_SRC:=$(TOPDIR)/qca/src/qca-net-standby/driver/eawtp
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-net-standby/driver/eawtp
 
 include $(INCLUDE_DIR)/local-development.mk
 ifeq ($(DUMP)$(PKG_VERSION),)
@@ -38,6 +38,7 @@ define KernelPackage/netstandby-eawtp-drv
   TITLE:=Standby eawtp module
   DEPENDS:=@TARGET_ipq53xx +kmod-qca-nss-dp +kmod-qca-wifi @!LINUX_3_18
   FILES:=$(PKG_BUILD_DIR)/qca-net-standby-eawtp.ko
+endef
 endif
 
 define KernelPackage/netstandby-eawtp-drv/Description

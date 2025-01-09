@@ -4,7 +4,7 @@ include $(INCLUDE_DIR)/package.mk
 
 PKG_NAME:=netfn
 PKG_RELEASE:=1
-NETFN_BUILD_DIR:=$(TOPDIR)/qca/src/nss-userspace-oss
+NETFN_BUILD_DIR:=$(TOPDIR)/qca/src/nss/apps-oss/nss-userspace-oss
 
 define Package/netfn
   SECTION:=utils

@@ -5,6 +5,8 @@ PKG_NAME:=emesh-sp
 PKG_RELEASE:=1
 PKG_LICENSE:=ISC
 
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/emesh-sp
+
 ifeq ($(CONFIG_TARGET_sdx75),y)
 -include $(TOPDIR)/owrt-qti-ipq-prop/include/local-development.mk
 else

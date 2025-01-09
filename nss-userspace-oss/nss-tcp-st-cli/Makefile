@@ -5,7 +5,7 @@ PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=1
 
-LOCAL_SRC:=$(TOPDIR)/qca/src/nss-speedtest/nss-tcp-st-cli/
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/nss-speedtest/nss-tcp-st-cli/
 include $(INCLUDE_DIR)/local-development.mk
 include $(INCLUDE_DIR)/package.mk
 

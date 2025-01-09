@@ -6,7 +6,7 @@ PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=1
 
-LOCAL_SRC:=$(TOPDIR)/qca/src/qca-nss-dscpstats
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-nss-dscpstats
 
 include $(INCLUDE_DIR)/local-development.mk
 ifeq ($(DUMP)$(PKG_VERSION),)

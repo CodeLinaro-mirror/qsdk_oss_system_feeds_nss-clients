@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=nss-udp-st-drv
-LOCAL_SRC:=$(TOPDIR)/qca/src/nss-speedtest/nss-udp-st-drv
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/nss-speedtest/nss-udp-st-drv
 PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/local-development.mk

@@ -5,7 +5,7 @@ PKG_NAME:=qca-nss-ppe-ds
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=1
-LOCAL_SRC:=$(TOPDIR)/qca/src/qca-nss-ppe
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/base/qca-nss-ppe
 
 include $(INCLUDE_DIR)/local-development.mk
 ifeq ($(DUMP)$(PKG_VERSION),)

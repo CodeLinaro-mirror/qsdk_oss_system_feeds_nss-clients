@@ -6,9 +6,9 @@ PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=2
 ifeq ($(CONFIG_PACKAGE_kmod-netstandby-eawtp-drv),y)
-LOCAL_SRC:=$(TOPDIR)/qca/src/qca-net-standby/driver/erp
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-net-standby/driver/erp
 else
-LOCAL_SRC:=$(TOPDIR)/qca/src/qca-net-standby/driver/
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-net-standby/driver/
 endif
 
 include $(INCLUDE_DIR)/local-development.mk

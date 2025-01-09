@@ -3,7 +3,7 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=nssinfo
 PKG_RELEASE:=1
-NSSINFO_BUILD_DIR:=$(TOPDIR)/qca/src/nss-userspace-oss
+NSSINFO_BUILD_DIR:=$(TOPDIR)/qca/src/nss/apps-oss/nss-userspace-oss
 
 include $(INCLUDE_DIR)/package.mk
 

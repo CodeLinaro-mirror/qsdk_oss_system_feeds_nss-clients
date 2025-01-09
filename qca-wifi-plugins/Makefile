@@ -5,7 +5,7 @@ PKG_NAME:=qca-wifi-plugins
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=2
-LOCAL_SRC:=$(TOPDIR)/qca/src/qca-wifi-plugins
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-wifi-plugins
 
 include $(INCLUDE_DIR)/local-development.mk
 ifeq ($(DUMP)$(PKG_VERSION),)
