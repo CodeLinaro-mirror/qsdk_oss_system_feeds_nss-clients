@@ -72,28 +72,6 @@ define KernelPackage/qca-nss-netfn-sk-offload/install
         $(INSTALL_DIR) $(1)/usr/bin
 endef
 
-define KernelPackage/qca-nss-netfn-pkt-steer
-  SECTION:=kernel
-  CATEGORY:=Kernel modules
-  SUBMENU:=Network Support
-  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx
-  TITLE:=NSS network function for pkt steer
-  FILES:=$(PKG_BUILD_DIR)/offload/pkt_steer/qca-nss-netfn-pkt-steer.ko
-  AUTOLOAD:=$(call AutoLoad,53,qca-nss-netfn-pkt-steer)
-endef
-
-ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-pkt-steer),)
-MAKE_OPTS+=pkt_steer=y
-endif
-
-define KernelPackage/qca-nss-netfn-pkt-steer/Description
-NSS network function for pkt steer.
-endef
-
-define KernelPackage/qca-nss-netfn-pkt-steer/install
-	$(INSTALL_DIR) $(1)/usr/bin
-endef
-
 define KernelPackage/qca-nss-netfn-capwap
   SECTION:=kernel
   CATEGORY:=Kernel modules
@@ -250,14 +228,6 @@ define Build/InstallDev/qca-nss-netfn-auto-capwapmgr
 
 endef
 
-define Build/InstallDev
-	$(call Build/InstallDev/qca-nss-flowmgr,$(1))
-	$(call Build/InstallDev/qca-nss-netfn-flow-cookie,$(1))
-	$(call Build/InstallDev/qca-nss-netfn-auto-flowmgr,$(1))
-	$(call Build/InstallDev/qca-nss-netfn-auto-flowcookie,$(1))
-	$(call Build/InstallDev/qca-nss-netfn-auto-capwapmgr,$(1))
-endef
-
 define KernelPackage/qca-nss-netfn-dtls
   SECTION:=kernel
   CATEGORY:=Kernel modules
@@ -310,7 +280,12 @@ define Build/InstallDev/qca-nss-netfn-capwapmgr
 endef
 
 define Build/InstallDev
-        $(call Build/InstallDev/qca-nss-netfn-capwapmgr,$(1))
+	$(call Build/InstallDev/qca-nss-flowmgr,$(1))
+	$(call Build/InstallDev/qca-nss-netfn-flow-cookie,$(1))
+	$(call Build/InstallDev/qca-nss-netfn-auto-flowmgr,$(1))
+	$(call Build/InstallDev/qca-nss-netfn-auto-flowcookie,$(1))
+	$(call Build/InstallDev/qca-nss-netfn-auto-capwapmgr,$(1))
+	$(call Build/InstallDev/qca-nss-netfn-capwapmgr,$(1))
 endef
 
 EXTRA_CFLAGS+= \
@@ -331,7 +306,6 @@ endef
 $(eval $(call KernelPackage,qca-nss-netfn-tcpst))
 $(eval $(call KernelPackage,qca-nss-netfn-sk-offload))
 $(eval $(call KernelPackage,qca-nss-netfn-capwap))
-$(eval $(call KernelPackage,qca-nss-netfn-pkt-steer))
 $(eval $(call KernelPackage,qca-nss-flowmgr))
 $(eval $(call KernelPackage,qca-nss-netfn-dtls))
 $(eval $(call KernelPackage,qca-nss-netfn-capwapmgr))
