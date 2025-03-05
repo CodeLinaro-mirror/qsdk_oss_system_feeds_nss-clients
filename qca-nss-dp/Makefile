@@ -67,7 +67,9 @@ ifneq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx),
 EXTRA_CFLAGS+= -DNSS_DP_NETSTANDBY
 MAKE_OPTS+=dp-net-standby=y
 MAKE_OPTS+=dp-ppe-ds=y
+ifneq ($(CONFIG_TARGET_ipq95xx_generic_QSDK_MinEnt), y)
 MAKE_OPTS+=dp-loopback=y
+endif
 endif
 
 NSS_DP_HAL_DIR:=$(PKG_BUILD_DIR)/hal
