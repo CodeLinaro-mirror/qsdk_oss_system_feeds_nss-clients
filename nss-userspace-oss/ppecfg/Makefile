@@ -43,6 +43,7 @@ define Package/ppecfg/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ppecfg_acl_config.json $(1)/etc/ppecfg/ppecfg_acl_config.json
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ppecfg_policer_config.json $(1)/etc/ppecfg/ppecfg_policer_config.json
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/mcast_policer_config.json $(1)/etc/ppecfg/policer_default_cfg.json
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/ppecfg_exception_config.json $(1)/etc/ppecfg/ppecfg_exception_config.json
 
 ifeq ($(CONFIG_TARGET_ipq95xx),y)
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/mcast_acl_ipq95xx_config.json $(1)/etc/ppecfg/acl_default_cfg.json
