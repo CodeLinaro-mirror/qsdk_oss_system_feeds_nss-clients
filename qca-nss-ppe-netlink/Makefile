@@ -17,6 +17,12 @@ MAKE_OPTS:=
 
 include $(INCLUDE_DIR)/package.mk
 
+ifeq ($(CONFIG_TARGET_ipq),y)
+subtarget:=$(SUBTARGET)
+else
+subtarget:=$(CONFIG_TARGET_BOARD)
+endif
+
 define KernelPackage/qca-nss-ppe-netlink
   SECTION:=kernel
   CATEGORY:=Kernel modules
@@ -45,6 +51,7 @@ define Build/Compile
 	$(KERNEL_MAKE) $(strip $(MAKE_OPTS)) \
 		M="$(PKG_BUILD_DIR)" \
 		EXTRA_CFLAGS="$(EXTRA_CFLAGS)" \
+		SoC="$(subtarget)" \
 		modules
 endef
 
