@@ -51,6 +51,7 @@ define KernelPackage/qca-nss-ppe-rule/install
 	$(INSTALL_BIN) ./files/dot1p_dump.sh $(1)/usr/bin/
 	$(INSTALL_BIN) ./files/gemport_dump.sh $(1)/usr/bin/
 	$(INSTALL_BIN) ./files/cos_map_dump.sh $(1)/usr/bin/
+	$(INSTALL_BIN) ./files/qos_dump.sh $(1)/usr/bin/
 endef
 
 define Build/InstallDev/qca-nss-ppe-rule
