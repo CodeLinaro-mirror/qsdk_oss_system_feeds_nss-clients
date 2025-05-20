@@ -153,7 +153,8 @@ define KernelPackage/qca-nss-ecm-wifi-plugin
 		+PACKAGE_kmod-qca-wifi-lowmem-profile:kmod-qca-wifi \
 		+PACKAGE_kmod-qca-nss-ecm-premium:kmod-qca-nss-ecm-premium \
 		+PACKAGE_kmod-qca-nss-ecm-standard:kmod-qca-nss-ecm-standard \
-		+PACKAGE_kmod-qca-nss-ecm-noload:kmod-qca-nss-ecm-noload
+		+PACKAGE_kmod-qca-nss-ecm-noload:kmod-qca-nss-ecm-noload \
+		+PACKAGE_kmod-ath12k:kmod-ath12k
 
   FILES+=$(PKG_BUILD_DIR)/ecm_wifi_plugins/ecm-wifi-plugin.ko
 endef
