@@ -53,10 +53,11 @@ EXTRA_CFLAGS+= \
 	-I$(STAGING_DIR)/usr/include/qca-ssdk/init
 endif
 
+ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-gre-mgr),)
 MAKE_OPTS+=gre-mgr=y
-
 ifneq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx),)
 MAKE_OPTS+=GRE_MGR_FE_PPE_ENABLE=y
+endif
 endif
 
 define Build/Compile
