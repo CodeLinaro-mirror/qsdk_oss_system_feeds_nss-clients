@@ -127,6 +127,24 @@ define KernelPackage/qca-nss-ppe-dsa-mgr/Description
 Kernel modules for NSS PPE DSA manager
 endef
 
+define KernelPackage/qca-nss-ppe-ath-clients
+  SECTION:=kernel
+  CATEGORY:=Kernel modules
+  SUBMENU:=Network Devices
+  TITLE:=Kernel driver for NSS PPE ath clients
+  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx \
+		+kmod-qca-nss-ppe \
+		+kmod-qca-nss-ppe-vp \
+		+kmod-qca-nss-ppe-ds \
+  FILES:=$(PKG_BUILD_DIR)/clients/ath_clients/qca-nss-ppe-ath-clients.ko
+  AUTOLOAD:=$(call AutoLoad,52,qca-nss-ppe-ath-clients)
+endef
+
+define KernelPackage/qca-nss-ppe-ath-clients/Description
+Kernel modules for NSS PPE ath clients
+endef
+
+
 EXTRA_CFLAGS+= \
 	-I$(STAGING_DIR)/usr/include/qca-ssdk \
 	-I$(STAGING_DIR)/usr/include/qca-ssdk/fal \
@@ -173,6 +191,9 @@ ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-ppe-dsa-mgr),)
 MAKE_OPTS+=dsa-mgr=y
 endif
 
+MAKE_OPTS+=ath_clients=y
+EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-ppe
+
 define KernelPackage/qca-nss-ppe-bridge-mgr/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/qca-nss-ppe-bridge-mgr.init $(1)/etc/init.d/qca-nss-ppe-bridge-mgr
@@ -192,3 +213,4 @@ $(eval $(call KernelPackage,qca-nss-ppe-pppoe-mgr))
 $(eval $(call KernelPackage,qca-nss-pppoe-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-lag-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-dsa-mgr))
+$(eval $(call KernelPackage,qca-nss-ppe-ath-clients))
