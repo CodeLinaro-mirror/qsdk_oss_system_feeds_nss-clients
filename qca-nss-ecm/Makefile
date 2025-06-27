@@ -114,6 +114,7 @@ define KernelPackage/qca-nss-ecm-standard
 	+TARGET_ipq95xx:kmod-qca-nss-sfe +TARGET_ipq95xx:kmod-qca-nss-ppe \
 	+TARGET_ipq53xx:kmod-qca-nss-sfe +TARGET_ipq53xx:kmod-qca-nss-ppe \
 	+TARGET_ipq54xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe \
+	+TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe \
 	+PACKAGE_kmod-qca-hyfi-bridge:kmod-qca-hyfi-bridge \
 	+!(TARGET_ipq53xx_ipq53xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256)&&(TARGET_ipq53xx||TARGET_ipq54xx):kmod-bonding \
 	+TARGET_ipq95xx:kmod-bonding +PACKAGE_kmod-emesh-sp:kmod-emesh-sp
@@ -134,9 +135,10 @@ $(call KernelPackage/qca-nss-ecm/Default)
   VARIANT:=premium
   DEPENDS+=+PACKAGE_kmod-qca-hyfi-bridge:kmod-qca-hyfi-bridge +PACKAGE_kmod-qca-mcs:kmod-qca-mcs +kmod-nat46 \
 	+kmod-l2tp +kmod-pppol2tp +kmod-pptp +TARGET_ipq95xx:kmod-qca-nss-sfe +TARGET_ipq95xx:kmod-qca-nss-ppe \
+	+TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq96xx:kmod-qca-nss-ppe +TARGET_ipq96xx:kmod-qca-nss-ppe-vxlanmgr \
 	+TARGET_ipq53xx:kmod-qca-nss-sfe +TARGET_ipq53xx:kmod-qca-nss-ppe +TARGET_ipq95xx:kmod-qca-nss-ppe-vxlanmgr +TARGET_ipq53xx:kmod-qca-nss-ppe-vxlanmgr \
 	+TARGET_ipq54xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe +TARGET_ipq54xx:kmod-qca-nss-ppe-vxlanmgr \
-	+TARGET_ipq95xx:kmod-qca-nss-ppe-tunipip6 +TARGET_ipq53xx:kmod-qca-nss-ppe-tunipip6 +TARGET_ipq54xx:kmod-qca-nss-ppe-tunipip6 \
+	+TARGET_ipq95xx:kmod-qca-nss-ppe-tunipip6 +TARGET_ipq53xx:kmod-qca-nss-ppe-tunipip6 +TARGET_ipq54xx:kmod-qca-nss-ppe-tunipip6 +TARGET_ipq96xx:kmod-qca-nss-ppe-tunipip6 \
 	+kmod-bonding PACKAGE_kmod-emesh-sp:kmod-emesh-sp
 endef
 
@@ -201,6 +203,7 @@ define KernelPackage/qca-nss-ecm-noload
   PROVIDES:=kmod-qca-nss-ecm
   VARIANT:=noload
   DEPENDS+=+kmod-l2tp +kmod-pppol2tp +kmod-pptp +TARGET_ipq95xx:kmod-qca-nss-sfe +TARGET_ipq95xx:kmod-qca-nss-ppe \
+	   +TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq96xx:kmod-qca-nss-ppe \
 	   +TARGET_ipq53xx:kmod-qca-nss-sfe +TARGET_ipq53xx:kmod-qca-nss-ppe +TARGET_ipq53xx:kmod-qca-nss-ppe-tunipip6 \
 	   +TARGET_ipq54xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe +TARGET_ipq54xx:kmod-qca-nss-ppe-tunipip6 \
 	   +kmod-bonding +PACKAGE_kmod-qca-mcs:kmod-qca-mcs +PACKAGE_kmod-qca-nss-ppe-mapt:kmod-nat46 \
@@ -383,6 +386,13 @@ ECM_MAKE_OPTS+=ECM_MHT_ENABLE=y
 FILES_EXAMPLES+=$(PKG_BUILD_DIR)/examples/ecm_sfe_l2.ko
 endif
 
+ifneq ($(CONFIG_TARGET_ipq96xx),)
+ECM_MAKE_OPTS+=ECM_FRONT_END_SFE_ENABLE=y
+ECM_MAKE_OPTS+=ECM_FRONT_END_PPE_ENABLE=y
+ECM_MAKE_OPTS+=ECM_MHT_ENABLE=y
+FILES_EXAMPLES+=$(PKG_BUILD_DIR)/examples/ecm_sfe_l2.ko
+endif
+
 ifneq ($(findstring 6.1, $(LINUX_VERSION)),)
 ECM_MAKE_OPTS+=ECM_CLASSIFIER_WIFI_ENABLE=y
 endif
@@ -450,7 +460,7 @@ subtarget:=$(CONFIG_TARGET_BOARD)
 endif
 
 # Enable NSS frontend for all the platforms except ipq40xx, ipq95xx, ipq53xx and ipq54xx
-ifeq ($(CONFIG_TARGET_ipq_ipq40xx)$(CONFIG_TARGET_ipq40xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx),)
+ifeq ($(CONFIG_TARGET_ipq_ipq40xx)$(CONFIG_TARGET_ipq40xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx)$(CONFIG_TARGET_ipq96xx),)
 ifneq ($(BUILD_VARIANT), nonss)
 ECM_MAKE_OPTS+=ECM_FRONT_END_NSS_ENABLE=y
 endif
