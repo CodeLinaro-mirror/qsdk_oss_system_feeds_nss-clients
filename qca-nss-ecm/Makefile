@@ -24,6 +24,10 @@ ifeq ($(CONFIG_QCA_NSS_ECM_EXAMPLES_MARK),y)
        FILES_EXAMPLES+=$(PKG_BUILD_DIR)/examples/ecm_mark_test.ko
 endif
 
+ifeq ($(CONFIG_QCA_NSS_ECM_EXAMPLES_SDX),y)
+	FILES_EXAMPLES=$(PKG_BUILD_DIR)/examples/ecm_sdx_pcc.ko
+endif
+
 #Explicitly enable OVS external module, if ovsmgr is enabled.
 ifneq ($(CONFIG_PACKAGE_kmod-qca-ovsmgr),)
 CONFIG_QCA_NSS_ECM_OVS=y
@@ -499,6 +503,7 @@ define Build/Compile
 		EXAMPLES_BUILD_MARK="$(CONFIG_QCA_NSS_ECM_EXAMPLES_MARK)" \
 		EXAMPLES_BUILD_OVS="$(CONFIG_QCA_NSS_ECM_OVS)" \
 		BUILD_ECM_WIFI_PLUGIN="$(CONFIG_QCA_NSS_ECM_WIFI_PLUGIN)" \
+		EXAMPLES_BUILD_SDX="$(CONFIG_QCA_NSS_ECM_EXAMPLES_SDX)" \
 		modules
 endef
 
@@ -520,6 +525,12 @@ menu "ECM Configuration"
 		bool "Build OVS classifier external module"
 		help
 			Selecting this will build the OVS classifier external module.
+		default n
+
+	config QCA_NSS_ECM_EXAMPLES_SDX
+		bool "Build PCC SDX module"
+		help
+			Selecting this will build the SDX PCC classifier usage module.
 		default n
 endmenu
 endef
