@@ -432,6 +432,10 @@ ECM_MAKE_OPTS+=ECM_INTERFACE_L2TPV3_ENABLE=y
 endif
 endif
 
+ifeq ($(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq54xx), y)
+ECM_MAKE_OPTS+=ECM_FRONT_END_BRIDGE_ISOLATION_ENABLE=y
+endif
+
 # Disable ECM IPv6 support when global IPv6 support is disabled.
 ifneq ($(CONFIG_IPV6),)
 ECM_MAKE_OPTS+=ECM_IPV6_ENABLE=y
