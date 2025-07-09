@@ -19,10 +19,11 @@ define KernelPackage/qca-nss-sfe
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq50xx||TARGET_ipq53xx||TARGET_ipq54xx +kmod-pppoe \
+  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq50xx||TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx +kmod-pppoe \
 	   +TARGET_ipq95xx:kmod-qca-nss-ppe-rule \
 	   +TARGET_ipq53xx:kmod-qca-nss-ppe-rule \
-	   +TARGET_ipq54xx:kmod-qca-nss-ppe-rule
+	   +TARGET_ipq54xx:kmod-qca-nss-ppe-rule \
+	   +TARGET_ipq96xx:kmod-qca-nss-ppe-rule
   TITLE:=Kernel data path for SFE
   FILES:=$(PKG_BUILD_DIR)/qca-nss-sfe.ko
   KCONFIG:=CONFIG_NF_CONNTRACK_EVENTS=y
