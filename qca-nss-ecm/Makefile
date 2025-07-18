@@ -277,6 +277,10 @@ ECM_MAKE_OPTS:=ECM_CLASSIFIER_HYFI_ENABLE=y
 EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/hyfibr
 endif
 
+ifneq ($(CONFIG_PACKAGE_kmod-ath),)
+ECM_MAKE_OPTS+=ECM_OPEN_PROFILE_ENABLE=y
+endif
+
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-ecm-wifi-plugin),)
 CONFIG_QCA_NSS_ECM_WIFI_PLUGIN=y
 ifneq ($(CONFIG_PACKAGE_kmod-ath),)
