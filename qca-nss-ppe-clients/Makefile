@@ -133,7 +133,8 @@ define KernelPackage/qca-nss-ppe-ath-clients
   SUBMENU:=Network Devices
   TITLE:=Kernel driver for NSS PPE ath clients
   DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx \
-		+kmod-qca-nss-ppe-vp
+		+kmod-qca-nss-ppe-vp \
+		+PACKAGE_kmod-ath12k:kmod-ath12k
   FILES:=$(PKG_BUILD_DIR)/clients/ath_client/qca-nss-ppe-ath-clients.ko
   AUTOLOAD:=$(call AutoLoad,52,qca-nss-ppe-ath-clients)
 endef
