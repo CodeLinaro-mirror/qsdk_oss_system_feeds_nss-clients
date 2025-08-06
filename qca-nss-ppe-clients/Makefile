@@ -197,6 +197,8 @@ EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-ppe
 define KernelPackage/qca-nss-ppe-bridge-mgr/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/qca-nss-ppe-bridge-mgr.init $(1)/etc/init.d/qca-nss-ppe-bridge-mgr
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) ./files/ppe_bridge_mgr_dump $(1)/usr/bin/
 endef
 
 define KernelPackage/qca-nss-ppe-lag-mgr/install
