@@ -196,6 +196,11 @@ define KernelPackage/qca-nss-ppe-bridge-mgr/install
 	$(INSTALL_BIN) ./files/qca-nss-ppe-bridge-mgr.init $(1)/etc/init.d/qca-nss-ppe-bridge-mgr
 endef
 
+define KernelPackage/qca-nss-ppe-lag-mgr/install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) ./files/ppe_lag_dump $(1)/usr/bin/
+endef
+
 define Build/Compile
 	$(KERNEL_MAKE) $(strip $(MAKE_OPTS)) \
 		M="$(PKG_BUILD_DIR)" \
