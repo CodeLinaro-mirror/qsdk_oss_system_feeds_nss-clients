@@ -22,7 +22,7 @@ define KernelPackage/qca-nss-wifi-plugins
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=NSS Plugin Module
-  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq54xx||TARGET_ipq53xx +kmod-qca-nss-ppe +kmod-qca-nss-ppe-vp +kmod-qca-nss-ppe-ds @!LINUX_3_18
+  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq54xx||TARGET_ipq53xx||TARGET_ipq52xx||TARGET_ipq96xx +kmod-qca-nss-ppe +kmod-qca-nss-ppe-vp +kmod-qca-nss-ppe-ds @!LINUX_3_18
   FILES:=$(PKG_BUILD_DIR)/qca-nss-wifi-plugins.ko
   AUTOLOAD:=$(call AutoLoad,53,qca-nss-wifi-plugins)
 endef
