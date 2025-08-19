@@ -266,6 +266,11 @@ endif
 
 ifneq ($(CONFIG_PACKAGE_kmod-ath),)
 ECM_MAKE_OPTS+=ECM_OPEN_PROFILE_ENABLE=y
+# Set to y only if kernel config CONFIG_BRIDGE_MCAST_OFFLOAD is enabled
+ifneq ($(CONFIG_BRIDGE_MCAST_OFFLOAD),)
+ECM_MAKE_OPTS+=ECM_ATH_MCAST_ENABLE=y
+EXTRA_CFLAGS += -I$(LINUX_DIR)/net/bridge
+endif
 endif
 
 ECM_MAKE_OPTS+=ECM_FRONT_END_FSE_ENABLE=y
