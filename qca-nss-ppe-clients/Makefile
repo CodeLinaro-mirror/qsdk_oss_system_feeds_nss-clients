@@ -71,27 +71,8 @@ define KernelPackage/qca-nss-ppe-pppoe-mgr
   AUTOLOAD:=$(call AutoLoad,51,qca-nss-ppe-pppoe-mgr)
 endef
 
-define KernelPackage/qca-nss-pppoe-mgr
-  SECTION:=kernel
-  CATEGORY:=Kernel modules
-  SUBMENU:=Network Devices
-  TITLE:=Kernel driver for NSS PPPoE manager
-  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx \
-		+kmod-pppoe @!LINUX_3_18 \
-		+PACKAGE_kmod-bonding:kmod-bonding \
-		+TARGET_ipq95xx:kmod-qca-nss-ppe \
-		+TARGET_ipq53xx:kmod-qca-nss-ppe \
-		+TARGET_ipq54xx:kmod-qca-nss-ppe
-  FILES:=$(PKG_BUILD_DIR)/clients/pppoe/qca-nss-pppoe-mgr.ko
-  AUTOLOAD:=$(call AutoLoad,51,qca-nss-pppoe-mgr)
-endef
-
 define KernelPackage/qca-nss-ppe-pppoe-mgr/Description
 Kernel modules for NSS PPE PPPoE manager
-endef
-
-define KernelPackage/qca-nss-pppoe-mgr/Description
-Kernel modules for NSS PPPoE manager
 endef
 
 define KernelPackage/qca-nss-ppe-lag-mgr
@@ -173,13 +154,6 @@ MAKE_OPTS+=PPPOE_MGR_FE_PPE_ENABLE=y
 endif
 endif
 
-ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-pppoe-mgr),)
-MAKE_OPTS+=pppoe-mgr=y
-ifneq ($(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq54xx),)
-MAKE_OPTS+=PPPOE_MGR_FE_PPE_ENABLE=y
-endif
-endif
-
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-ppe-lag-mgr),)
 MAKE_OPTS+=lag-mgr=y
 endif
@@ -212,7 +186,6 @@ endef
 $(eval $(call KernelPackage,qca-nss-ppe-bridge-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-vlan-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-pppoe-mgr))
-$(eval $(call KernelPackage,qca-nss-pppoe-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-lag-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-dsa-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-ath-clients))
