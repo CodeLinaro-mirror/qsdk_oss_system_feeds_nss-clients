@@ -112,7 +112,7 @@ load_ecm() {
 
 	[ -d /sys/module/ecm ] || {
 		ecm_dependency
-		insmod ecm front_end_selection=$(get_front_end_mode) register_ip_post_routing=$(get_register_ip_post_routing) register_br_post_routing=$(get_register_br_post_routing)
+		insmod ecm front_end_selection=$(get_front_end_mode) register_ip_post_routing=$(get_register_ip_post_routing) register_br_post_routing=$(get_register_br_post_routing) ecm_front_end_ipv4_stopped=1 ecm_front_end_ipv6_stopped=1
 
 		if [ $(get_front_end_mode) == 4 ]; then
 			insmod ecm_ae_select
@@ -136,6 +136,9 @@ load_ecm() {
 		[ -d /sys/module/qca_wifi_nss_plugins ] || [ -f /tmp/.wifi-config-done ] ||
 		[ -f /lib/modules/$kernel_version/ath.ko ] && insmod qca-wifi-nss-plugins
 	}
+
+	echo 0 > /sys/kernel/debug/ecm/front_end_ipv4_stop
+	echo 0 > /sys/kernel/debug/ecm/front_end_ipv6_stop
 
 	support_bridge && {
 		sysctl -w net.bridge.bridge-nf-call-ip6tables=1
