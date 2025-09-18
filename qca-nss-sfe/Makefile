@@ -84,7 +84,11 @@ endif
 
 #TSO is supported only on Alder, Miami and Marina
 ifeq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx), y)
-EXTRA_CFLAGS+= -DSFE_TSO_MAX_SEG_LIMIT_ENABLE
+EXTRA_CFLAGS+= -DSFE_TSO_MAX_SEG_LIMIT_ENABLE=y
+EXTRA_CFLAGS+= -DSFE_TSO_SEG_MAX=32
+else ifeq ($(CONFIG_TARGET_ipq54xx), y)
+EXTRA_CFLAGS+= -DSFE_TSO_MAX_SEG_LIMIT_ENABLE=y
+EXTRA_CFLAGS+= -DSFE_TSO_SEG_MAX=48
 endif
 
 #L2TPv3 is supported only on Alder, Miami and Marina Premium and 512M profile
