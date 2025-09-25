@@ -38,7 +38,7 @@ EXTRA_CFLAGS+= \
 			  -I$(STAGING_DIR)/usr/include/qca-wifi \
 			  -I$(STAGING_DIR)/usr/include/qca-nss-ecm \
 			  -I$(STAGING_DIR)/usr/include/qca-nss-ppe \
-
+			  -I$(STAGING_DIR)/usr/include/mac80211/uapi/linux
 
 ifneq ($(CONFIG_PACKAGE_kmod-ath),)
 ifneq ($(CONFIG_PACKAGE_kmod-emesh-sp),)
