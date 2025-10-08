@@ -73,29 +73,24 @@ EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-ppe
 SFE_MAKE_OPTS+=SFE_RFS_SUPPORTED=y
 endif
 
-ifneq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx),)
 SFE_MAKE_OPTS+=SFE_DSA_ACCEL_ENABLE=y
-endif
 
 #PPE_QOS is supported only if PPE Qdisc is enabled
 ifeq ($(CONFIG_PACKAGE_kmod-qca-nss-ppe-qdisc),y)
 SFE_MAKE_OPTS+=SFE_PPE_QOS_SUPPORTED=y
 endif
 
-#TSO is supported only on Alder, Miami and Marina
-ifeq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx), y)
 EXTRA_CFLAGS+= -DSFE_TSO_MAX_SEG_LIMIT_ENABLE=y
-EXTRA_CFLAGS+= -DSFE_TSO_SEG_MAX=32
-else ifeq ($(CONFIG_TARGET_ipq54xx), y)
-EXTRA_CFLAGS+= -DSFE_TSO_MAX_SEG_LIMIT_ENABLE=y
+
+ifeq ($(CONFIG_TARGET_ipq54xx)$(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx), y)
 EXTRA_CFLAGS+= -DSFE_TSO_SEG_MAX=48
+else
+EXTRA_CFLAGS+= -DSFE_TSO_SEG_MAX=32
 endif
 
-#L2TPv3 is supported only on Alder, Miami and Marina Premium and 512M profile
-ifeq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx), y)
+#L2TPv3 is supported only on Premium and 512M profile
 ifneq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),256)
 SFE_MAKE_OPTS+=SFE_L2TPV3_SUPPORTED=y
-endif
 endif
 
 define Build/Compile
