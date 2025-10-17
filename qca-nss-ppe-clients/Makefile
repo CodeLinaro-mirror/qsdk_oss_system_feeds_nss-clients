@@ -63,7 +63,7 @@ define KernelPackage/qca-nss-ppe-pppoe-mgr
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Kernel driver for NSS PPE PPPoE manager
-  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx \
+  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx||TARGET_ipq52xx \
 		+kmod-qca-nss-ppe \
 		+kmod-pppoe @!LINUX_3_18 \
 		+PACKAGE_kmod-bonding:kmod-bonding
@@ -148,7 +148,7 @@ endif
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-ppe-pppoe-mgr),)
 MAKE_OPTS+=pppoe-mgr=y
-ifneq ($(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq54xx),)
+ifneq ($(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq54xx)$(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx),)
 MAKE_OPTS+=PPPOE_MGR_FE_PPE_ENABLE=y
 endif
 endif
