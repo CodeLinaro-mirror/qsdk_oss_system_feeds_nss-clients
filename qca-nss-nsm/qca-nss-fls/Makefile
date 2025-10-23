@@ -37,6 +37,10 @@ ifneq ($(CONFIG_PACKAGE_kmod-emesh-sp),)
 FLS_MAKE_OPTS+=FLS_ECM_CLASSIFIER_EMESH_ENABLE=y
 endif
 
+ifeq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),512)
+FLS_MAKE_OPTS+=FLS_MEM_PROFILE_512=y
+endif
+
 define Build/Compile
 	$(KERNEL_MAKE) $(strip $(FLS_MAKE_OPTS)) \
 		M="$(PKG_BUILD_DIR)" \
