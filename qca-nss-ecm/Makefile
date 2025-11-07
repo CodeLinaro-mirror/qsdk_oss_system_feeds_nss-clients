@@ -154,24 +154,6 @@ define KernelPackage/qca-nss-ecm-nonss
   VARIANT:=nonss
 endef
 
-define KernelPackage/qca-nss-ecm-wifi-plugin
-  TITLE+= (with no-nss for host mode)
-  DEPENDS+=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx \
-		+PACKAGE_kmod-qca-wifi-unified-profile:kmod-qca-wifi +PACKAGE_kmod-ath:kmod-ath \
-		+PACKAGE_kmod-qca-wifi-lowmem-profile:kmod-qca-wifi \
-		+PACKAGE_kmod-qca-nss-ecm-premium:kmod-qca-nss-ecm-premium \
-		+PACKAGE_kmod-qca-nss-ecm-standard:kmod-qca-nss-ecm-standard \
-		+PACKAGE_kmod-qca-nss-ecm-noload:kmod-qca-nss-ecm-noload \
-		+PACKAGE_kmod-ath12k:kmod-ath12k
-
-  FILES+=$(PKG_BUILD_DIR)/ecm_wifi_plugins/ecm-wifi-plugin.ko
-endef
-
-define KernelPackage/qca-nss-ecm-wifi-plugin/Description/Default
-$(call KernelPackage/qca-nss-ecm/Description/Default)
-with the ecm-wifi-plugin enabled
-endef
-
 define KernelPackage/qca-nss-ecm-premium/Description/Default
 $(call KernelPackage/qca-nss-ecm/Description/Default)
 with the premium features enabled
@@ -286,22 +268,8 @@ ifneq ($(CONFIG_PACKAGE_kmod-ath),)
 ECM_MAKE_OPTS+=ECM_OPEN_PROFILE_ENABLE=y
 endif
 
-ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-ecm-wifi-plugin),)
-CONFIG_QCA_NSS_ECM_WIFI_PLUGIN=y
-ifneq ($(CONFIG_PACKAGE_kmod-ath),)
-ifneq ($(CONFIG_PACKAGE_kmod-emesh-sp),)
-ECM_MAKE_OPTS+=ECM_WIFI_PLUGIN_OPEN_PROFILE_ENABLE=y
 ECM_MAKE_OPTS+=ECM_FRONT_END_FSE_ENABLE=y
 ECM_MAKE_OPTS+=ECM_CLASSIFIER_MSCS_ENABLE=y
-endif
-else
-ifneq ($(CONFIG_PACKAGE_kmod-emesh-sp),)
-ECM_MAKE_OPTS+=ECM_CLASSIFIER_MSCS_SCS_ENABLE=y
-EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/emesh-sp
-endif
-ECM_MAKE_OPTS+=ECM_FRONT_END_FSE_ENABLE=y
-endif
-endif
 
 ECM_MAKE_OPTS+=ECM_FRONT_END_FSE_ENABLE=y
 ECM_MAKE_OPTS+=ECM_CLASSIFIER_MSCS_ENABLE=y
@@ -508,7 +476,6 @@ define Build/Compile
 		EXAMPLES_BUILD_PCC="$(CONFIG_QCA_NSS_ECM_EXAMPLES_PCC)" \
 		EXAMPLES_BUILD_MARK="$(CONFIG_QCA_NSS_ECM_EXAMPLES_MARK)" \
 		EXAMPLES_BUILD_OVS="$(CONFIG_QCA_NSS_ECM_OVS)" \
-		BUILD_ECM_WIFI_PLUGIN="$(CONFIG_QCA_NSS_ECM_WIFI_PLUGIN)" \
 		EXAMPLES_BUILD_SDX="$(CONFIG_QCA_NSS_ECM_EXAMPLES_SDX)" \
 		modules
 endef
@@ -546,4 +513,3 @@ $(eval $(call KernelPackage,qca-nss-ecm-standard))
 $(eval $(call KernelPackage,qca-nss-ecm-premium-noload))
 $(eval $(call KernelPackage,qca-nss-ecm-premium))
 $(eval $(call KernelPackage,qca-nss-ecm-nonss))
-$(eval $(call KernelPackage,qca-nss-ecm-wifi-plugin))
