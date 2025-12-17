@@ -121,7 +121,7 @@ define KernelPackage/qca-nss-ecm-standard
 	+TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe \
 	+TARGET_ipq52xx:kmod-qca-nss-sfe +TARGET_ipq52xx:kmod-qca-nss-ppe \
 	+PACKAGE_kmod-qca-hyfi-bridge:kmod-qca-hyfi-bridge \
-	+!(TARGET_ipq53xx_ipq53xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256)&&(TARGET_ipq53xx||TARGET_ipq54xx):kmod-bonding \
+	+!(TARGET_ipq53xx_ipq53xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256Open||TARGET_ipq53xx_ipq53xx_32_QSDK_256Open)&&(TARGET_ipq53xx||TARGET_ipq54xx):kmod-bonding \
 	+TARGET_ipq95xx:kmod-bonding +PACKAGE_kmod-emesh-sp:kmod-emesh-sp
 endef
 
@@ -304,7 +304,7 @@ ECM_MAKE_OPTS+=ECM_INTERFACE_PPPOE_ENABLE=y
 
 ifeq ($(LOCAL_VARIANT),standard)
 ifeq ($(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq54xx),y)
-ifeq ($(CONFIG_TARGET_ipq53xx_ipq53xx_32_QSDK_256)$(CONFIG_TARGET_ipq54xx_ipq54xx_32_QSDK_256),)
+ifeq ($(CONFIG_TARGET_ipq53xx_ipq53xx_32_QSDK_256)$(CONFIG_TARGET_ipq54xx_ipq54xx_32_QSDK_256)$(CONFIG_TARGET_ipq54xx_ipq54xx_32_QSDK_256Open)$(CONFIG_TARGET_ipq53xx_ipq53xx_32_QSDK_256Open),)
 ECM_MAKE_OPTS+=ECM_INTERFACE_BOND_ENABLE=y
 endif
 endif
