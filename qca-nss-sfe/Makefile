@@ -51,6 +51,13 @@ ifneq ($(CONFIG_BRIDGE_VLAN_FILTERING),)
 SFE_MAKE_OPTS+=SFE_BRIDGE_VLAN_FILTERING_ENABLE=y
 endif
 
+# Enable SFE ESP SPI Passthrough support when kernel config is enabled
+ifneq ($(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx),)
+ifneq ($(CONFIG_NF_CT_PROTO_ESP),)
+SFE_MAKE_OPTS+=SFE_ESP_SPI_PASSTH_ENABLE=y
+endif
+endif
+
 EXTRA_CFLAGS+= -I$(PKG_BUILD_DIR)/exports
 
 ifeq ($(CONFIG_LOWMEM_FLASH),y)
