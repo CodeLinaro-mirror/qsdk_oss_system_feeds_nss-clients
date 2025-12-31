@@ -28,7 +28,7 @@ define KernelPackage/qca-nss-ppe-mirror-test
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Kernel driver for PPE test module
-  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx \
+  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx||TARGET_ipq52xx \
 		+kmod-qca-nss-ppe-rule
   FILES:=$(PKG_BUILD_DIR)/test/qca-nss-ppe-mirror-test.ko
 endef
