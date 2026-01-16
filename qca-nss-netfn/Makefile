@@ -105,8 +105,7 @@ define KernelPackage/qca-nss-flowmgr
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Kernel driver for Network function manager
-  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq95xx \
-	  +kmod-qca-nss-ppe \
+  DEPENDS:=+kmod-qca-nss-ppe \
 	  +kmod-qca-nss-sfe
   FILES:=$(PKG_BUILD_DIR)/mgr/flowmgr/qca-nss-flowmgr.ko
   AUTOLOAD:=$(call AutoLoad,50,qca-nss-flowmgr)
@@ -300,6 +299,7 @@ define Build/Compile
 	$(KERNEL_MAKE) $(strip $(MAKE_OPTS)) \
 		CROSS_COMPILE="$(TARGET_CROSS)" \
 		ARCH="$(LINUX_KARCH)" \
+		SoC="$(subtarget)" \
 		M="$(PKG_BUILD_DIR)" \
 		EXTRA_CFLAGS="$(EXTRA_CFLAGS)" \
 		modules
