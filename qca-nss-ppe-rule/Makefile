@@ -46,6 +46,7 @@ define KernelPackage/qca-nss-ppe-rule/install
 	$(INSTALL_BIN) ./files/mcast_hammer.sh $(1)/usr/bin/
 	$(INSTALL_BIN) ./files/json_mcast_hammer.sh $(1)/usr/bin/
 	$(INSTALL_BIN) ./files/pm_dump.sh $(1)/usr/bin/
+	$(INSTALL_BIN) ./files/vlan_rule_dump.sh $(1)/usr/bin/
 endef
 
 define Build/InstallDev/qca-nss-ppe-rule
