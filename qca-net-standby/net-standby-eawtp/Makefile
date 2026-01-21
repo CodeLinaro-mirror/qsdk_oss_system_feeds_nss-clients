@@ -4,6 +4,7 @@ include $(INCLUDE_DIR)/kernel.mk
 PKG_NAME:=netstandby-eawtp-drv
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
+PKG_LICENSE:=ISC
 PKG_RELEASE:=2
 LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-net-standby/driver/eawtp
 

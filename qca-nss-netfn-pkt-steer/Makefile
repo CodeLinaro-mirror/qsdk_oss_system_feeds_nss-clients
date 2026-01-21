@@ -2,6 +2,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=qca-nss-netfn-pkt-steer
+PKG_LICENSE:=ISC
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=1
@@ -27,7 +28,7 @@ define KernelPackage/qca-nss-netfn-pkt-steer
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx
+  DEPENDS:=@TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq52xx
   TITLE:=NSS network function for pkt steer
   FILES:=$(PKG_BUILD_DIR)/offload/pkt_steer/qca-nss-netfn-pkt-steer.ko
   AUTOLOAD:=$(call AutoLoad,53,qca-nss-netfn-pkt-steer)

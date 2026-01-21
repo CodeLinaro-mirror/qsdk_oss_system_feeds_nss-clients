@@ -2,6 +2,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=qca-nss-ecm
+PKG_LICENSE:=ISC
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=1
@@ -106,6 +107,8 @@ else ifeq ($(CONFIG_LOWMEM_FLASH),y)
 	echo 'net.netfilter.nf_conntrack_max=2048' >> $(1)/etc/sysctl.d/qca-nss-ecm.conf
 else ifeq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),512)
 	echo 'net.netfilter.nf_conntrack_max=8192' >> $(1)/etc/sysctl.d/qca-nss-ecm.conf
+else
+	echo 'net.netfilter.nf_conntrack_max=16384' >> $(1)/etc/sysctl.d/qca-nss-ecm.conf
 endif
 endef
 

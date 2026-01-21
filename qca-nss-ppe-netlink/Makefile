@@ -2,6 +2,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=qca-nss-ppe-netlink
+PKG_LICENSE:=ISC
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=2
@@ -16,6 +17,12 @@ PKG_BUILD_DEPENDS :=
 MAKE_OPTS:=
 
 include $(INCLUDE_DIR)/package.mk
+
+ifeq ($(CONFIG_TARGET_ipq),y)
+subtarget:=$(SUBTARGET)
+else
+subtarget:=$(CONFIG_TARGET_BOARD)
+endif
 
 define KernelPackage/qca-nss-ppe-netlink
   SECTION:=kernel
@@ -45,6 +52,7 @@ define Build/Compile
 	$(KERNEL_MAKE) $(strip $(MAKE_OPTS)) \
 		M="$(PKG_BUILD_DIR)" \
 		EXTRA_CFLAGS="$(EXTRA_CFLAGS)" \
+		SoC="$(subtarget)" \
 		modules
 endef
 

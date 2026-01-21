@@ -2,6 +2,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=qca-nss-nsm
+PKG_LICENSE:=ISC
 LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-nss-nsm
 PKG_RELEASE:=1
 
