@@ -49,6 +49,7 @@ define KernelPackage/qca-nss-ppe-rule/install
 	$(INSTALL_BIN) ./files/vlan_rule_dump.sh $(1)/usr/bin/
 	$(INSTALL_BIN) ./files/dscp_pcp_dump.sh $(1)/usr/bin/
 	$(INSTALL_BIN) ./files/dot1p_dump.sh $(1)/usr/bin/
+	$(INSTALL_BIN) ./files/gemport_dump.sh $(1)/usr/bin/
 endef
 
 define Build/InstallDev/qca-nss-ppe-rule
@@ -89,6 +90,7 @@ MAKE_OPTS+=PPE_DSCP_ENABLED=y
 MAKE_OPTS+=PPE_PM_ENABLED=y
 MAKE_OPTS+=PPE_PORT_MGMT_ENABLED=y
 MAKE_OPTS+=PPE_DOT1P_ENABLED=y
+MAKE_OPTS+=PPE_GEMPORT_ENABLED=y
 endif
 
 ifeq ($(CONFIG_TARGET_ipq96xx),y)
