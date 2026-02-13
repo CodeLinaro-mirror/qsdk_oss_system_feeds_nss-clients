@@ -121,7 +121,7 @@ define KernelPackage/qca-nss-ecm-standard
 	+TARGET_ipq95xx:kmod-qca-nss-sfe +TARGET_ipq95xx:kmod-qca-nss-ppe \
 	+TARGET_ipq53xx:kmod-qca-nss-sfe +TARGET_ipq53xx:kmod-qca-nss-ppe \
 	+TARGET_ipq54xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe \
-	+TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe \
+	+TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq96xx:kmod-qca-nss-ppe \
 	+TARGET_ipq52xx:kmod-qca-nss-sfe +TARGET_ipq52xx:kmod-qca-nss-ppe \
 	+PACKAGE_kmod-qca-hyfi-bridge:kmod-qca-hyfi-bridge \
 	+!(TARGET_ipq53xx_ipq53xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256Open||TARGET_ipq53xx_ipq53xx_32_QSDK_256Open)&&(TARGET_ipq53xx||TARGET_ipq54xx):kmod-bonding \
