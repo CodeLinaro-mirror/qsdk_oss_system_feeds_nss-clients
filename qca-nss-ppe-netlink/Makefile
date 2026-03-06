@@ -48,6 +48,14 @@ EXTRA_CFLAGS+= \
 
 MAKE_OPTS+=netlink=y
 
+ifneq ($(CONFIG_TARGET_ipq52xx)$(CONFIG_TARGET_ipq96xx),)
+ifneq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),256)
+ifneq ($(CONFIG_LOWMEM_FLASH),y)
+MAKE_OPTS+=PPE_TUN_RPS_ENABLED=y
+endif
+endif
+endif
+
 define Build/Compile
 	$(KERNEL_MAKE) $(strip $(MAKE_OPTS)) \
 		M="$(PKG_BUILD_DIR)" \
