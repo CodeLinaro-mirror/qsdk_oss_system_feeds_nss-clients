@@ -313,6 +313,13 @@ endif
 endif
 endif
 
+# Enable ECM ESP SPI Passthrough support when kernel config is enabled
+ifneq ($(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx),)
+ifneq ($(CONFIG_NF_CT_PROTO_ESP),)
+ECM_MAKE_OPTS+=ECM_FRONT_END_ESP_SPI_PASSTHROUGH=y
+endif
+endif
+
 ifneq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),256)
 ifneq ($(CONFIG_LOWMEM_FLASH),y)
 ifneq ($(CONFIG_XFRM),)
