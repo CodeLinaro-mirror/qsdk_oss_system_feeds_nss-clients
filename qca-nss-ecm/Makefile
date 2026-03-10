@@ -121,7 +121,7 @@ define KernelPackage/qca-nss-ecm-standard
 	+TARGET_ipq95xx:kmod-qca-nss-sfe +TARGET_ipq95xx:kmod-qca-nss-ppe \
 	+TARGET_ipq53xx:kmod-qca-nss-sfe +TARGET_ipq53xx:kmod-qca-nss-ppe \
 	+TARGET_ipq54xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe \
-	+TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq54xx:kmod-qca-nss-ppe \
+	+TARGET_ipq96xx:kmod-qca-nss-sfe +TARGET_ipq96xx:kmod-qca-nss-ppe \
 	+TARGET_ipq52xx:kmod-qca-nss-sfe +TARGET_ipq52xx:kmod-qca-nss-ppe \
 	+PACKAGE_kmod-qca-hyfi-bridge:kmod-qca-hyfi-bridge \
 	+!(TARGET_ipq53xx_ipq53xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256Open||TARGET_ipq53xx_ipq53xx_32_QSDK_256Open)&&(TARGET_ipq53xx||TARGET_ipq54xx):kmod-bonding \
@@ -444,8 +444,8 @@ ECM_MAKE_OPTS+=ECM_INTERFACE_L2TPV3_ENABLE=y
 endif
 endif
 
-ifeq ($(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq54xx), y)
-ECM_MAKE_OPTS+=ECM_FRONT_END_BRIDGE_ISOLATION_ENABLE=y
+ifeq ($(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq54xx)$(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx), y)
+ECM_MAKE_OPTS+=ECM_INTERFACE_BRIDGE_ISOLATION_ENABLE=y
 endif
 
 # Disable ECM IPv6 support when global IPv6 support is disabled.
