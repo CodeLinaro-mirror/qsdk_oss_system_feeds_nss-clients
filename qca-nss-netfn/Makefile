@@ -82,7 +82,7 @@ define KernelPackage/qca-nss-netfn-capwap
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@TARGET_ipq53xx \
+  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
 	  +kmod-qca-nss-ppe \
 	  +kmod-qca-nss-ppe-vp \
 	  +kmod-qca-nss-netfn-dtls \
@@ -133,7 +133,7 @@ define KernelPackage/qca-nss-netfn-flow-cookie
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Kernel driver for network function flow Cookie manager
-  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx
+  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx
   FILES:=$(PKG_BUILD_DIR)/offload/flow_cookie/qca-nss-netfn-flow-cookie.ko
 endef
 
@@ -163,7 +163,7 @@ define KernelPackage/qca-nss-netfn-auto-flowmgr
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Network function test manager netfn auto flowmgr
-  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx \
+  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx \
 		+kmod-qca-nss-flowmgr
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/flowmgr/qca-nss-netfn-auto-flowmgr.ko
 endef
@@ -213,7 +213,7 @@ define KernelPackage/qca-nss-netfn-auto-capwapmgr
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Network function test manager netfn auto capwapmgr
-  DEPENDS:=@TARGET_ipq53xx \
+  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
 	+kmod-qca-nss-netfn-capwapmgr
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/capwapmgr/qca-nss-netfn-auto-capwapmgr.ko
 endef
@@ -237,7 +237,7 @@ define KernelPackage/qca-nss-netfn-dtls
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@TARGET_ipq53xx \
+  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
 	  +kmod-qca-nss-ppe-vp \
 	  +kmod-qca-nss-eip
   TITLE:=NSS network function DTLS offload
@@ -261,7 +261,7 @@ define KernelPackage/qca-nss-netfn-capwapmgr
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@TARGET_ipq53xx \
+  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
 	  +kmod-qca-nss-netfn-capwap \
 	  +kmod-qca-nss-netfn-dtls \
 	  +kmod-qca-nss-flowmgr
