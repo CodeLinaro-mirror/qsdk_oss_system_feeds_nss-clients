@@ -59,6 +59,11 @@ SFE_MAKE_OPTS+=SFE_ESP_SPI_PASSTH_ENABLE=y
 endif
 endif
 
+#comment out the sixth tuple support if needed.
+ifneq ($(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx)$(CONFIG_TARGET_ipq54xx),)
+SFE_MAKE_OPTS+=SFE_SIXTH_TUPLE_ENABLE=y
+endif
+
 EXTRA_CFLAGS+= -I$(PKG_BUILD_DIR)/exports
 
 ifeq ($(CONFIG_LOWMEM_FLASH),y)
