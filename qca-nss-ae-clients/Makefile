@@ -1,12 +1,15 @@
+ifndef __QCA_NSS_AE_CLIENTS_FEED_MAKEFILE__
+__QCA_NSS_AE_CLIENTS_FEED_MAKEFILE__:=1
+
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
-PKG_NAME:=qca-nss-ppe-clients
+PKG_NAME:=qca-nss-ae-clients
 PKG_LICENSE:=ISC
 PKG_SOURCE_PROTO:=git
 PKG_BRANCH:=master
 PKG_RELEASE:=2
-LOCAL_SRC:=$(TOPDIR)/qca/src/nss/base/qca-nss-ppe
+LOCAL_SRC:=$(TOPDIR)/qca/src/nss/clients/qca-nss-ae-clients
 
 include $(INCLUDE_DIR)/local-development.mk
 ifeq ($(DUMP)$(PKG_VERSION),)
@@ -191,3 +194,5 @@ $(eval $(call KernelPackage,qca-nss-ppe-pppoe-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-lag-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-dsa-mgr))
 $(eval $(call KernelPackage,qca-nss-ppe-ath-clients))
+
+endif # __QCA_NSS_AE_CLIENTS_FEED_MAKEFILE__
