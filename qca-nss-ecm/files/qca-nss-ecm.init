@@ -67,6 +67,21 @@ get_register_br_post_routing() {
 	esac
 }
 
+get_sixth_tuple_mode() {
+	config_load "ecm"
+	config_get sixth_tuple_mode global sixth_tuple_mode "disable"
+	case $sixth_tuple_mode in
+	vlan)
+		echo '2'
+		;;
+	vsi)	echo '1'
+		;;
+	*)
+		echo '0'
+		;;
+	esac
+}
+
 support_bridge() {
 	#NSS support bridge acceleration
 	[ -d /sys/kernel/debug/ecm/ecm_nss_ipv4 ] && return 0
@@ -80,7 +95,12 @@ load_sfe() {
 	local kernel_version=$(uname -r)
 
 	[ -e "/lib/modules/$kernel_version/qca-nss-sfe.ko" ] && {
-		[ -d /sys/module/qca_nss_sfe ] || insmod qca-nss-sfe
+		[ -d /sys/module/qca_nss_sfe ] && rmmod qca-nss-sfe
+		if [ $(get_sixth_tuple_mode) == 0 ]; then
+			insmod qca-nss-sfe
+		else
+			insmod qca-nss-sfe sixth_tuple_enable=1
+		fi
 	}
 
 	if [ $(get_front_end_mode) == 6 ]; then
@@ -106,6 +126,9 @@ ecm_dependency() {
 	[ -e /lib/modules/$(uname -r)/bonding.ko ] && modprobe bonding
 	[ -e /lib/modules/$(uname -r)/l2tp_ppp.ko ] && modprobe l2tp_ppp
 	[ -e /lib/modules/$(uname -r)/qca-nss-ppe-vxlanmgr.ko ] && modprobe qca-nss-ppe-vxlanmgr
+	[ -e /proc/sys/ppe/ppe_drv/ppe_drv_sixth_tuple_en ] && {
+			echo "$(get_sixth_tuple_mode)" > /proc/sys/ppe/ppe_drv/ppe_drv_sixth_tuple_en
+	}
 }
 
 load_ecm() {
