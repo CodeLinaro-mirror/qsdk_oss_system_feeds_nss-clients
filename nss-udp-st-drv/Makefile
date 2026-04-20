@@ -16,9 +16,9 @@ define KernelPackage/$(PKG_NAME)
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@TARGET_ipq50xx||TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx \
-		+TARGET_ipq53xx||TARGET_ipq95xx||TARGET_ipq54xx:kmod-qca-nss-ppe-vp \
-		+TARGET_ipq53xx||TARGET_ipq95xx||TARGET_ipq54xx:kmod-qca-nss-ppe-tun \
+  DEPENDS:=@TARGET_ipq50xx||TARGET_ipq95xx||TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq52xx||TARGET_ipq96xx \
+		+TARGET_ipq53xx||TARGET_ipq95xx||TARGET_ipq54xx||TARGET_ipq52xx||TARGET_ipq96xx:kmod-qca-nss-ppe-vp \
+		+TARGET_ipq53xx||TARGET_ipq95xx||TARGET_ipq54xx||TARGET_ipq52xx||TARGET_ipq96xx:kmod-qca-nss-ppe-tun \
 		+kmod-pppoe
   TITLE:=Kernel driver for NSS UDP Speedtest
   FILES:=$(PKG_BUILD_DIR)/nss-udp-st.ko
@@ -37,9 +37,10 @@ define Build/InstallDev
 	$(CP) $(PKG_BUILD_DIR)/exports/* $(STAGING_DIR)/usr/include/nss-udp-st-drv/
 endef
 
-ifeq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx), y)
+ifeq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx)$(CONFIG_TARGET_ipq52xx)$(CONFIG_TARGET_ipq96xx), y)
 EXTRA_CFLAGS+= \
-	-I$(STAGING_DIR)/usr/include/qca-nss-ppe
+	-I$(STAGING_DIR)/usr/include/qca-nss-ppe \
+	-I$(STAGING_DIR)/usr/include/qca-nss-dp \
 
 NSS_UDP_ST_DRV_MAKE_OPTS+=NSS_UDP_ST_DRV_VP=y
 endif
