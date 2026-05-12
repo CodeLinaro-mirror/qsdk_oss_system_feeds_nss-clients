@@ -40,9 +40,15 @@ endef
 ifeq ($(CONFIG_TARGET_ipq95xx)$(CONFIG_TARGET_ipq53xx)$(CONFIG_TARGET_ipq54xx)$(CONFIG_TARGET_ipq52xx)$(CONFIG_TARGET_ipq96xx), y)
 EXTRA_CFLAGS+= \
 	-I$(STAGING_DIR)/usr/include/qca-nss-ppe \
-	-I$(STAGING_DIR)/usr/include/qca-nss-dp \
 
 NSS_UDP_ST_DRV_MAKE_OPTS+=NSS_UDP_ST_DRV_VP=y
+endif
+
+ifeq ($(CONFIG_TARGET_ipq52xx)$(CONFIG_TARGET_ipq96xx), y)
+EXTRA_CFLAGS+= \
+	-I$(STAGING_DIR)/usr/include/qca-nss-dp \
+
+NSS_UDP_ST_DRV_MAKE_OPTS+=NSS_UDP_ST_DRV_HW_OFFLOAD=y
 endif
 
 define Build/Compile
