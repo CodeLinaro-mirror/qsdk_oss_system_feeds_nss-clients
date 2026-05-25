@@ -55,6 +55,10 @@ EXTRA_CFLAGS+= \
 
 MAKE_OPTS+=ppe-vp=y
 
+ifeq ($(CONFIG_TARGET_ipq52xx_ipq52xx_32_QSDK_Sfu), y)
+MAKE_OPTS+=PPE_SFU_PROFILE=y
+endif
+
 define Build/Compile
 	$(KERNEL_MAKE) $(strip $(MAKE_OPTS)) \
 		M="$(PKG_BUILD_DIR)" \
