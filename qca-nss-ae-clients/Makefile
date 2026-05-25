@@ -165,6 +165,10 @@ ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-ppe-dsa-mgr),)
 MAKE_OPTS+=dsa-mgr=y
 endif
 
+ifeq ($(CONFIG_TARGET_ipq52xx_ipq52xx_32_QSDK_Sfu), y)
+MAKE_OPTS+=PPE_SFU_PROFILE=y
+endif
+
 MAKE_OPTS+=ath_clients=y
 EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-ppe
 
