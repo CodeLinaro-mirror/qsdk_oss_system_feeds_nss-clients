@@ -65,6 +65,10 @@ ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-sk-offload),)
 MAKE_OPTS+=skoffload=y
 endif
 
+ifeq ($(CONFIG_TARGET_ipq52xx_ipq52xx_32_QSDK_Sfu), y)
+MAKE_OPTS+=PPE_SFU_PROFILE=y
+endif
+
 define KernelPackage/qca-nss-netfn-sk-offload/Description
 Kernel modules for network function sk offload
 endef
