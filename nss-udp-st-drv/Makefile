@@ -51,10 +51,21 @@ EXTRA_CFLAGS+= \
 NSS_UDP_ST_DRV_MAKE_OPTS+=NSS_UDP_ST_DRV_HW_OFFLOAD=y
 endif
 
+ifeq ($(CONFIG_TARGET_ipq52xx_ipq52xx_32_QSDK_Sfu), y)
+NSS_UDP_ST_DRV_MAKE_OPTS+=NSS_UDP_ST_DRV_SFU_PROFILE=y
+endif
+
+ifeq ($(CONFIG_TARGET_ipq),y)
+subtarget:=$(SUBTARGET)
+else
+subtarget:=$(CONFIG_TARGET_BOARD)
+endif
+
 define Build/Compile
 	$(KERNEL_MAKE) $(strip $(NSS_UDP_ST_DRV_MAKE_OPTS)) \
 		M="$(PKG_BUILD_DIR)" \
 		EXTRA_CFLAGS="$(EXTRA_CFLAGS)" \
+		SoC="$(subtarget)" \
 		modules
 endef
 
