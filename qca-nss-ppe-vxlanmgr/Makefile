@@ -41,10 +41,6 @@ define KernelPackage/qca-nss-ppe-vxlanmgr/Description
 Kernel driver for PPE VxLAN tunnel client
 endef
 
-define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/include/qca-nss-ppe
-	$(CP) $(PKG_BUILD_DIR)/exports/* $(1)/usr/include/qca-nss-ppe
-endef
 
 EXTRA_CFLAGS+= \
 	-I$(STAGING_DIR)/usr/include/qca-nss-ppe \
