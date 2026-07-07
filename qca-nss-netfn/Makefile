@@ -84,6 +84,7 @@ define KernelPackage/qca-nss-netfn-capwap
   SUBMENU:=Network Support
   DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
 	  +kmod-qca-nss-ppe \
+	  +kmod-qca-nss-dp \
 	  +kmod-qca-nss-ppe-vp \
 	  +kmod-qca-nss-netfn-dtls \
 	  +kmod-qca-nss-netfn-pkt-steer \
@@ -238,6 +239,7 @@ define KernelPackage/qca-nss-netfn-dtls
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
   DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
+	  +kmod-qca-nss-dp \
 	  +kmod-qca-nss-ppe-vp \
 	  +kmod-qca-nss-eip
   TITLE:=NSS network function DTLS offload
@@ -297,7 +299,8 @@ EXTRA_CFLAGS+= \
 	-I$(PKG_BUILD_DIR)/exports \
 	-I$(PKG_BUILD_DIR)/offload/exports \
 	-I$(STAGING_DIR)/usr/include/qca-nss-ppe \
-	-I$(STAGING_DIR)/usr/include/qca-nss-sfe
+	-I$(STAGING_DIR)/usr/include/qca-nss-sfe \
+	-I$(STAGING_DIR)/usr/include/qca-nss-dp
 
 define Build/Compile
 	$(KERNEL_MAKE) $(strip $(MAKE_OPTS)) \
