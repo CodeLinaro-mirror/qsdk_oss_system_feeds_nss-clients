@@ -97,8 +97,14 @@ define KernelPackage/qca-nss-ecm/Default/install
 	$(INSTALL_DATA) ./files/qca-nss-ecm.firewall $(1)/etc/firewall.d/qca-nss-ecm
 	$(INSTALL_BIN) ./files/qca-nss-ecm.init $(1)/etc/init.d/qca-nss-ecm
 	$(INSTALL_BIN) ./files/ecm_dump.sh $(1)/usr/bin/
-ifneq ($(CONFIG_TARGET_ipq96xx_generic_QSDK_Open)$(CONFIG_TARGET_ipq52xx_generic_QSDK_Open),)
+ifneq ($(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx),)
+ifneq ($(CONFIG_NF_CT_PROTO_ESP),)
+ifneq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),256)
+ifneq ($(CONFIG_LOWMEM_FLASH),y)
 	$(INSTALL_BIN) ./files/ecm_esp_spi_accel.sh $(1)/usr/bin/
+endif
+endif
+endif
 endif
 	$(INSTALL_BIN) ./files/on-demand-down $(1)/lib/netifd/offload/on-demand-down
 	$(INSTALL_DATA) ./files/qca-nss-ecm.uci $(1)/etc/config/ecm
@@ -319,7 +325,11 @@ endif
 # Enable ECM ESP SPI Passthrough support when kernel config is enabled
 ifneq ($(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx),)
 ifneq ($(CONFIG_NF_CT_PROTO_ESP),)
+ifneq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),256)
+ifneq ($(CONFIG_LOWMEM_FLASH),y)
 ECM_MAKE_OPTS+=ECM_FRONT_END_ESP_SPI_PASSTHROUGH=y
+endif
+endif
 endif
 endif
 

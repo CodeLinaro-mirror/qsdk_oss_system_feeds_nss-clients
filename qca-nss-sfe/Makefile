@@ -55,7 +55,11 @@ endif
 # Enable SFE ESP SPI Passthrough support when kernel config is enabled
 ifneq ($(CONFIG_TARGET_ipq96xx)$(CONFIG_TARGET_ipq52xx),)
 ifneq ($(CONFIG_NF_CT_PROTO_ESP),)
+ifneq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),256)
+ifneq ($(CONFIG_LOWMEM_FLASH),y)
 SFE_MAKE_OPTS+=SFE_ESP_SPI_PASSTH_ENABLE=y
+endif
+endif
 endif
 endif
 
