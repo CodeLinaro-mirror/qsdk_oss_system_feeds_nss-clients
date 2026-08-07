@@ -58,7 +58,8 @@ define KernelPackage/qca-nss-ecm/Default
 	+(TARGET_ipq53xx_ipq53xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256):kmod-nf-conntrack \
 	+!(TARGET_ipq53xx_ipq53xx_32_QSDK_256||TARGET_ipq54xx_ipq54xx_32_QSDK_256):kmod-vxlan \
 	+kmod-pppoe @!LINUX_3_18 \
-	+PACKAGE_kmod-qca-ovsmgr:kmod-qca-ovsmgr
+	+PACKAGE_kmod-qca-ovsmgr:kmod-qca-ovsmgr \
+	+TARGET_ipq52xx:kmod-qca-nss-pon-plugin
   TITLE:=QCA NSS Enhanced Connection Manager (ECM)
   FILES:=$(PKG_BUILD_DIR)/*.ko $(FILES_EXAMPLES) $(PKG_BUILD_DIR)/examples/ecm_ae_select.ko
   KCONFIG:=CONFIG_BRIDGE_NETFILTER=y \
@@ -77,7 +78,8 @@ define KernelPackage/qca-nss-ecm-nonss/Default
 	+iptables-mod-extra +kmod-ipt-conntrack +kmod-pppoe @!LINUX_3_18 +PACKAGE_kmod-qca-ovsmgr:kmod-qca-ovsmgr \
 	+kmod-l2tp +kmod-pppol2tp +kmod-pptp +kmod-qca-nss-sfe +TARGET_ipq95xx:kmod-qca-nss-ppe-vxlanmgr +TARGET_ipq53xx:kmod-qca-nss-ppe-vxlanmgr \
 	+TARGET_ipq54xx:kmod-qca-nss-ppe-vxlanmgr +kmod-vxlan \
-	+kmod-bonding PACKAGE_kmod-emesh-sp:kmod-emesh-sp
+	+kmod-bonding PACKAGE_kmod-emesh-sp:kmod-emesh-sp \
+	+TARGET_ipq52xx:kmod-qca-nss-pon-plugin
   TITLE:=QCA NSS Enhanced Connection Manager (ECM)
   FILES:=$(PKG_BUILD_DIR)/*.ko $(FILES_EXAMPLES) $(PKG_BUILD_DIR)/examples/ecm_ae_select.ko
   KCONFIG:=CONFIG_BRIDGE_NETFILTER=y \
@@ -264,6 +266,10 @@ EXTRA_CFLAGS+= \
 	-I$(STAGING_DIR)/usr/include/qca-wifi \
 	-I$(STAGING_DIR)/usr/include/qca-nss-sfe \
 	-I$(STAGING_DIR)/usr/include/qca-nss-ppe
+
+ifeq ($(CONFIG_IPQ_PON), y)
+EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-pon-plugin
+endif
 
 ifneq ($(CONFIG_KERNEL_IPQ_MEM_PROFILE),256)
 ifneq ($(CONFIG_LOWMEM_FLASH),y)
