@@ -167,6 +167,7 @@ define KernelPackage/qca-nss-netfn-auto-flowmgr
   DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx \
 		+kmod-qca-nss-flowmgr
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/flowmgr/qca-nss-netfn-auto-flowmgr.ko
+  DEFAULT:=m
 endef
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-auto-flowmgr),)
@@ -189,9 +190,10 @@ define KernelPackage/qca-nss-netfn-auto-flowcookie
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Network function test manager netfn auto flowcookie
-  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx \
+  DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx \
   		+kmod-qca-nss-netfn-flow-cookie
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/flowcookie/qca-nss-netfn-auto-flowcookie.ko
+  DEFAULT:=m
 endef
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-auto-flowcookie),)
@@ -217,6 +219,7 @@ define KernelPackage/qca-nss-netfn-auto-capwapmgr
   DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
 	+kmod-qca-nss-netfn-capwapmgr
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/capwapmgr/qca-nss-netfn-auto-capwapmgr.ko
+  DEFAULT:=m
 endef
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-auto-capwapmgr),)
@@ -232,6 +235,30 @@ define Build/InstallDev/qca-nss-netfn-auto-capwapmgr
 	$(CP) $(PKG_BUILD_DIR)/exports/* $(1)/usr/include/qca-nss-netfn/
 	$(CP) $(PKG_BUILD_DIR)/netfn_auto/include/* $(1)/usr/include/qca-nss-netfn/
 
+endef
+
+define KernelPackage/nss-netfn-dev-attach
+  SECTION:=kernel
+  CATEGORY:=Kernel modules
+  SUBMENU:=Network Devices
+  TITLE:=Network function test manager netfn auto dev attach
+  DEPENDS:=+kmod-qca-nss-netfn-pkt-steer
+  FILES:=$(PKG_BUILD_DIR)/netfn_auto/dev_attach/nss-netfn-dev-attach.ko
+  DEFAULT:=m
+endef
+
+ifneq ($(CONFIG_PACKAGE_kmod-nss-netfn-dev-attach),)
+MAKE_OPTS+=nss_netfn_dev_attach=y
+endif
+
+define KernelPackage/nss-netfn-dev-attach/Description
+Network function test manager netfn auto dev attach
+endef
+
+define Build/InstallDev/nss-netfn-dev-attach
+	$(INSTALL_DIR) $(1)/usr/include/qca-nss-netfn
+	$(CP) $(PKG_BUILD_DIR)/exports/* $(1)/usr/include/qca-nss-netfn/
+	$(CP) $(PKG_BUILD_DIR)/netfn_auto/include/* $(1)/usr/include/qca-nss-netfn/
 endef
 
 define KernelPackage/qca-nss-netfn-dtls
@@ -322,3 +349,4 @@ $(eval $(call KernelPackage,qca-nss-netfn-flow-cookie))
 $(eval $(call KernelPackage,qca-nss-netfn-auto-flowmgr))
 $(eval $(call KernelPackage,qca-nss-netfn-auto-flowcookie))
 $(eval $(call KernelPackage,qca-nss-netfn-auto-capwapmgr))
+$(eval $(call KernelPackage,nss-netfn-dev-attach))
