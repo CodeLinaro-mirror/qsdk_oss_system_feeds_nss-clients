@@ -167,7 +167,7 @@ define KernelPackage/qca-nss-netfn-auto-flowmgr
   DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx \
 		+kmod-qca-nss-flowmgr
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/flowmgr/qca-nss-netfn-auto-flowmgr.ko
-  DEFAULT:=m
+  DEFAULT:=m if PACKAGE_kmod-qca-nss-flowmgr
 endef
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-auto-flowmgr),)
@@ -193,7 +193,7 @@ define KernelPackage/qca-nss-netfn-auto-flowcookie
   DEPENDS:=@TARGET_ipq53xx||TARGET_ipq54xx||TARGET_ipq96xx \
   		+kmod-qca-nss-netfn-flow-cookie
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/flowcookie/qca-nss-netfn-auto-flowcookie.ko
-  DEFAULT:=m
+  DEFAULT:=m if PACKAGE_kmod-qca-nss-netfn-flow-cookie
 endef
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-auto-flowcookie),)
@@ -219,7 +219,7 @@ define KernelPackage/qca-nss-netfn-auto-capwapmgr
   DEPENDS:=@TARGET_ipq53xx||TARGET_ipq96xx \
 	+kmod-qca-nss-netfn-capwapmgr
   FILES:=$(PKG_BUILD_DIR)/netfn_auto/capwapmgr/qca-nss-netfn-auto-capwapmgr.ko
-  DEFAULT:=m
+  DEFAULT:=m if PACKAGE_kmod-qca-nss-netfn-capwapmgr
 endef
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-netfn-auto-capwapmgr),)
