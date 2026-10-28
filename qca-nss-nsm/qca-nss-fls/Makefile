@@ -33,6 +33,7 @@ endef
 
 EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-sfe
 EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-ecm
+EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-ppe
 
 ifneq ($(CONFIG_PACKAGE_kmod-emesh-sp),)
 FLS_MAKE_OPTS+=FLS_ECM_CLASSIFIER_EMESH_ENABLE=y
